@@ -1,7 +1,7 @@
 {
   "name": "datascraping",
   "version": "1.0.0",
-  "description": "week 18 homework",
+  "description": "week 18 assigment 14 homework",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,22 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stvbuller/DataScraping.git"
+    "url": "git+https://github.com/bob-williams-1/week18assignment14datascrape"
   },
   "author": "robert williams",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/stvbuller/DataScraping/issues"
+
   },
-  "homepage": "https://github.com/stvbuller/DataScraping#readme",
+  "homepage": "https://github.com/bob-williams-1/week18assignment14datascrape/blob/master/README.md",
   "dependencies": {
-    "body-parser": "^1.15.0",
-    "cheerio": "^0.20.0",
-    "express": "^4.13.4",
-    "express-handlebars": "^3.0.0",
-    "mongojs": "^2.3.0",
-    "mongoose": "^4.4.6",
-    "morgan": "^1.7.0",
-    "request": "^2.69.0"
+   
   }
 }
