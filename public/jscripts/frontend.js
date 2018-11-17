@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  
   $("button").click(function(e){
     $.getJSON("/" + $(this).val(), function(response) {
       $("tbody").empty();
