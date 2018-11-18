@@ -59,7 +59,7 @@ app.get('/', function(req, res) {
 
 //scrape data and save to database
 app.get('/scrape', function(req, res) {
-  request('https://www.reddit.com/', function (error, response, html) {
+  request('https://www.nhmagazine.com', function (error, response, html) {
     var $ = cheerio.load(html);
     var result = [];
     $(".title").each(function(i, element){

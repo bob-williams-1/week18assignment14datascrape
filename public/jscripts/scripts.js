@@ -66,4 +66,4 @@ $(document).on('click', '.deleteItem', function(e){
 });
 
 
-}); //end of document.ready
+});
