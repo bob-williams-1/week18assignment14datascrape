@@ -2,14 +2,14 @@ $(document).ready(function() {
 
 $("#scrapedData").click(function(e){
   $.getJSON("/scrape", function() {
-    $("tbody").empty();
+    $("tbody").empty;
   });
 
 });
 
 $("#getItems").click(function(e){
   $.getJSON("/getItems", function(response) {
-    $("tbody").empty();
+    $("tbody").empty()
     response.forEach(function(scrapedData) {
       var newTr = "<tr>";
       newTr += "<td>" + scrapedData.title + "</td>";
@@ -49,19 +49,18 @@ $(document).on('click', '.deleteItem', function(e){
     response.forEach(function(scrapedData) {
       var newTr = "<tr>";
       newTr += "<td>" + scrapedData.title + "</td>";
-      newTr += "<td>" + scrapedData.link + "</td>";
       newTr += "</tr>";
       $("tbody").append(newTr);
       var newTextForm = '<form action="/submit/'+ scrapedData._id + '"  method="post">'
       newTextForm += '<input type="text" name="title" placeholder="Title">'
       newTextForm += '<textarea type="text" name="body">Comments Here</textarea>'
       newTextForm +=  '<input type="submit">'
-      newTextForm += '</form>'
+      newTextForm += '<form>'
       $("tbody").append(newTextForm);
       var newButton2 = '<button type="button" name="button" class="deleteItem" id="deleteItem" data-id="' +scrapedData._id + '">Delete</button>';
-      $("tbody").append(newButton2);
+      $("tbody").append(newButton2)
     });
-  });
+       });
 
 });
 
