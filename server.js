@@ -1,20 +1,18 @@
-//express setup
+
 var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-//request setup
+
 var request = require('request');
-//cheerio setup
+
 var cheerio = require('cheerio');
 
-//morgan setup
 var logger = require('morgan');
 
-//middleware init
 app.use("/jscripts", express.static("public/jscripts"));
 app.use("/css", express.static("public/css"));
-app.use(logger('dev'));
+app.use(logger('dev')
 
 //body-parser setup
 var bodyParser = require('body-parser');
@@ -24,19 +22,15 @@ app.use(bodyParser.urlencoded({
 
 //handlebars setup
 var expressHandlebars = require('express-handlebars');
-app.engine('handlebars', expressHandlebars({
+app.engine('handlebars', expressHandlebars(
   defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
 
 //mongoose setup
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
-//mongoose database configuration
-//for deployment to heroku
-//mongoose.connect('mongodb://s.buller@comcast.net:<password>@ds011389.mlab.com:11389/heroku_4l161lq4');
 
-//for local deployment
 mongoose.connect('mongodb://localhost/scraper');
 var db = mongoose.connection;
 
@@ -47,24 +41,21 @@ db.once('open', function() {
   console.log('Mongoose connection successful.');
 });
 
-//require mongoose schemas
 var ScrapedData = require('./models/scrapedDataModel.js');
-var Note = require('./models/noteModel.js');
+var Note = require('./models/noteModel.js')
 
 //routes
 app.get('/', function(req, res) {
   res.sendFile(process.cwd() + "/views/index.html");
-  //res.sendfile('./views/index.html');
+ 
 });
 
-//scrape data and save to database
+//scrape data and save 
 app.get('/scrape', function(req, res) {
   request('https://www.nhmagazine.com', function (error, response, html) {
     var $ = cheerio.load(html);
     var result = [];
-    $(".title").each(function(i, element){
-
-      //scrape some stuff, put it in an object
+    $(".title").each(function(i, element)
 
       var title = $(this).text();
       var link = $(element).children().attr('href');
@@ -74,9 +65,9 @@ app.get('/scrape', function(req, res) {
         //mongoose save data
         newScrapedData.save(function(err, doc) {
           if (err) {
-            console.log(err)    //res.send(err);
+            console.log(err)   
           } else {
-            console.log(doc)    //res.send(doc);
+            console.log(doc)    
           }
         });
       }
@@ -97,9 +88,9 @@ app.get('/getItems', function(req, res) {
   });
 });
 
-//delete all data from the database
-app.get('/deleteAll', function(req, res) {
-  //mongoose remove data from ScrapedData and Note collections
+
+app.get('/deleteAll', function(req, res) 
+
   Note.remove({}, function(err, dbResults) {
     if (err) {
       res.send(err);
@@ -117,7 +108,6 @@ app.get('/deleteAll', function(req, res) {
   });
 });
 
-//delete an item from the database
 app.get("/delete/:id", function(req, res){
   var id = req.params.id;
   console.log(req.params.id);
@@ -140,7 +130,7 @@ app.post('/submit/:id', function(req, res) {
         res.send(err);
       } else {
 
-    //Find the scraped data item and push the new note id into the item's notes array
+  
       ScrapedData.findOneAndUpdate({_id:id}, {$push: {'notes': doc._id}}, {new: true}, function(err, doc) {
         if (err) {
           res.send(err);
